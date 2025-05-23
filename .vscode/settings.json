@@ -1,0 +1,17 @@
+{
+  // Enable JSON with Comments
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+  
+  // Local schema fallback
+  "json.schemas": [
+    {
+      "fileMatch": ["package.json"],
+      "url": "./.vscode/package-schema.json"
+    }
+  ],
+  
+  // Temporary schema validation workaround
+  "json.schemaDownload.enable": false
+}
