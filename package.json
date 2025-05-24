@@ -1,5 +1,5 @@
 {
-  "name": "llm-code-assistant",
+  "name": "gh-llm-code-assistant",
   "displayName": "LLM Code Assistant",
   "description": "Multi-LLM code assistant with brainstorming capabilities",
   "version": "1.0.0",
@@ -28,7 +28,7 @@
                 "default": 0.7,
                 "description": "Model creativity level (0-1)"
             }
-        }
+        }ł
     },
     "commands": [
         {
