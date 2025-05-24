@@ -4,7 +4,7 @@
   "description": "Multi-LLM code assistant with brainstorming capabilities",
   "version": "1.0.0",
   "engines": {
-    "vscode": "^1.85.0"
+    "vscode": "^1.100.0"
   },
   "categories": [
     "Programming Languages"
@@ -15,37 +15,37 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+        "title": "AI Coding Assistant",
+        "properties": {
+            "llmAssistant.maxTokens": {
+                "type": "number",
+                "default": 2000,
+                "description": "Maximum tokens per response"
+            },
+            "llmAssistant.temperature": {
+                "type": "number",
+                "default": 0.7,
+                "description": "Model creativity level (0-1)"
+            }
+        }
+    },
     "commands": [
-      {
-        "command": "llm.securityReview",
-        "title": "Perform Security Review"
-      },
-      {
-        "command": "llm.generateTests",
-        "title": "Generate Test Cases"
-      },
-      {
-        "command": "llm.visualizeArch",
-        "title": "Visualize Architecture"
-      },
-      {
-        "command": "llm.startPairProgramming",
-        "title": "Start AI Pair Programming"
-      }
+        {
+            "command": "llm.openSettings",
+            "title": "Open AI Assistant Settings"
+        }
     ],
     "menus": {
-      "editor/context": [
-        {
-          "command": "llm.securityReview",
-          "group": "llm@1"
-        },
-        {
-          "command": "llm.generateTests",
-          "group": "llm@1"
-        }
-      ]
+        "view/title": [
+            {
+                "command": "llm.openSettings",
+                "group": "navigation",
+                "when": "view == llm-chat-view"
+            }
+        ]
     }
-  },
+},
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./"
@@ -59,7 +59,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.15.21",
-    "@types/vscode": "^1.100.0",
-    "typescript": "^5.8.3"
+    "@types/vscode": "^1.100.0"
   }
 }
