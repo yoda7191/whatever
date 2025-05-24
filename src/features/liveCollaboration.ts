@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
-import { CodeAssistant } from '../assistatnt';
+import { CodeAssistant } from '../assistant';
+
+declare const setTimeout: (handler: () => void, timeout?: number) => number;
 
 export class ModelCollaborationManager {
     private _statusBar: vscode.StatusBarItem;
@@ -31,29 +33,35 @@ export class ModelCollaborationManager {
         );
     }
 
-    private _showInlineSuggestion(document: vscode.TextDocument, suggestion: string) {
-        const decoration = vscode.window.createTextEditorDecorationType({
-            after: {
-                contentText: suggestion.split('\n')[0],
-                color: '#88888888',
-                margin: '0 0 0 20px'
-            }
-        });
-
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            const line = editor.selection.active.line;
-            const range = new vscode.Range(
-                new vscode.Position(line, 0),
-                new vscode.Position(line, 0)
-            );
-            
-            editor.setDecorations(decoration, [{
-                range,
-                renderOptions: { after: { contentText: suggestion } 
-            }]);
-            
-            setTimeout(() => decoration.dispose(), 5000);
+   private _showInlineSuggestion(document: vscode.TextDocument, suggestion: string) {
+    const decoration = vscode.window.createTextEditorDecorationType({
+        after: {
+            contentText: suggestion.split('\n')[0],
+            color: '#88888888',
+            margin: '0 0 0 20px'
         }
+    });
+
+
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+        const line = editor.selection.active.line;
+        const range = new vscode.Range(
+            new vscode.Position(line, 0),
+            new vscode.Position(line, 0)
+        );
+        
+        editor.setDecorations(decoration, [{
+            range,
+            renderOptions: { 
+                after: { 
+                    contentText: suggestion 
+                } 
+            }
+        }]);
+        
+        // Add proper NodeJS timeout typing
+        setTimeout(() => decoration.dispose(), 5000);
     }
+}
 }

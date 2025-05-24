@@ -16,36 +16,36 @@
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
-        {
-            "command": "llm.securityReview",
-            "title": "Perform Security Review"
-        },
-        {
-            "command": "llm.generateTests",
-            "title": "Generate Test Cases"
-        },
-        {
-            "command": "llm.visualizeArch",
-            "title": "Visualize Architecture"
-        },
-        {
-            "command": "llm.startPairProgramming",
-            "title": "Start AI Pair Programming"
-        }
+      {
+        "command": "llm.securityReview",
+        "title": "Perform Security Review"
+      },
+      {
+        "command": "llm.generateTests",
+        "title": "Generate Test Cases"
+      },
+      {
+        "command": "llm.visualizeArch",
+        "title": "Visualize Architecture"
+      },
+      {
+        "command": "llm.startPairProgramming",
+        "title": "Start AI Pair Programming"
+      }
     ],
     "menus": {
-        "editor/context": [
-            {
-                "command": "llm.securityReview",
-                "group": "llm@1"
-            },
-            {
-                "command": "llm.generateTests",
-                "group": "llm@1"
-            }
-        ]
+      "editor/context": [
+        {
+          "command": "llm.securityReview",
+          "group": "llm@1"
+        },
+        {
+          "command": "llm.generateTests",
+          "group": "llm@1"
+        }
+      ]
     }
-},
+  },
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./"
@@ -58,6 +58,8 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/vscode": "^1.100.0"
+    "@types/node": "^22.15.21",
+    "@types/vscode": "^1.100.0",
+    "typescript": "^5.8.3"
   }
 }

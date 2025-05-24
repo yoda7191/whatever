@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { CodeAssistant } from '../assistatnt';
+import { CodeAssistant } from '../assistant';
 
 export class ArchitectureVisualizer {
     private _panel: vscode.WebviewPanel | undefined;

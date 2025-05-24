@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { CodeAssistant } from './assistatnt';
+import { CodeAssistant } from './assistant';
 import { ChatViewProvider } from './chatView';
 import { MultiLLMOrchestrator } from './orchestrator'
 

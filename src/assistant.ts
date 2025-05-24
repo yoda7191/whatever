@@ -9,7 +9,7 @@ import { TestGenerator } from './features/testGeneration';
 import { ArchitectureVisualizer } from './features/architectureVisualizer'
 
 export class CodeAssistant {
-  // private orchestrator: MultiLLMOrchestrator;
+  public orchestrator: MultiLLMOrchestrator;
   public chatHistory: ChatHistoryManager;
   public codeReview: CodeReviewManager;
   public navigator: SemanticCodeNavigator
@@ -23,6 +23,7 @@ export class CodeAssistant {
       new OllamaService('opencoder:8b'),
       new OllamaService('llama3.1:8b')
     ];
+      this.orchestrator = new MultiLLMOrchestrator(models);
       this.codeReview = new CodeReviewManager(this);
       this.navigator = new SemanticCodeNavigator(this);
       this.collaboration = new ModelCollaborationManager(this);

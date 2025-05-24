@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { CodeAssistant } from './assistatnt';
+import { CodeAssistant } from './assistant';
 
 export class ChatViewProvider implements vscode.WebviewViewProvider {
   private view?: vscode.WebviewView;
@@ -40,37 +40,41 @@ export class ChatViewProvider implements vscode.WebviewViewProvider {
   }
 
   private getWebviewContent(): string {
+    const webview = this.view?.webview!;
+    const styleUri = webview.asWebviewUri(
+        vscode.Uri.joinPath(this.context.extensionUri, 'media', 'styles.css')
+    );
+    const scriptUri = webview.asWebviewUri(
+        vscode.Uri.joinPath(this.context.extensionUri, 'media', 'main.js')
+    );
+
     return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LLM Chat</title>
-        <style>
-          /* Add your styles here */
-        </style>
-      </head>
-      <body>
-        <div id="chat-container"></div>
-        <input type="text" id="message-input" />
-        <button id="send-button">Send</button>
-        <script>
-          (function() {
-            const vscode = acquireVsCodeApi();
-            // Add type-safe message handling
-            document.getElementById('send-button').addEventListener('click', () => {
-              const input = document.getElementById('message-input') as HTMLInputElement;
-              vscode.postMessage({
-                type: 'sendMessage',
-                content: input.value
-              });
-              input.value = '';
-            });
-          })();
-        </script>
-      </body>
-      </html>
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="${styleUri}" rel="stylesheet">
+            <title>AI Coding Assistant</title>
+        </head>
+        <body>
+            <div class="chat-container">
+                <div class="message-list" id="message-list"></div>
+                <div class="input-container">
+                    <textarea id="message-input" placeholder="Ask the AI coding assistant..."></textarea>
+                    <div class="button-group">
+                        <button id="send-button" class="primary">
+                            <span class="codicon codicon-send"></span> Send
+                        </button>
+                        <button id="brainstorm-button">
+                            <span class="codicon codicon-lightbulb"></span> Brainstorm
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <script src="${scriptUri}"></script>
+        </body>
+        </html>
     `;
-  }
+}
 }
