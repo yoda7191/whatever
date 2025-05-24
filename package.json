@@ -1,53 +1,63 @@
 {
-  "name": "chat-with-ollama",
-  "displayName": "Chat with Ollama",
-  "description": "AI-powered code assistant with context awareness",
-  "version": "0.0.1",
+  "name": "llm-code-assistant",
+  "displayName": "LLM Code Assistant",
+  "description": "Multi-LLM code assistant with brainstorming capabilities",
+  "version": "1.0.0",
   "engines": {
-    "vscode": "^1.82.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages"
   ],
   "activationEvents": [
-    "onCommand:chatWithOllama.start"
+    "onCommand:llm.startChat",
+    "onCommand:llm.brainstorm"
   ],
-  "main": "./out/src/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "chatWithOllama.start",
-        "title": "Start Chat with Ollama"
-      }
-    ]
-  },
+        {
+            "command": "llm.securityReview",
+            "title": "Perform Security Review"
+        },
+        {
+            "command": "llm.generateTests",
+            "title": "Generate Test Cases"
+        },
+        {
+            "command": "llm.visualizeArch",
+            "title": "Visualize Architecture"
+        },
+        {
+            "command": "llm.startPairProgramming",
+            "title": "Start AI Pair Programming"
+        }
+    ],
+    "menus": {
+        "editor/context": [
+            {
+                "command": "llm.securityReview",
+                "group": "llm@1"
+            },
+            {
+                "command": "llm.generateTests",
+                "group": "llm@1"
+            }
+        ]
+    }
+},
   "scripts": {
-    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "lint": "eslint src --ext ts",
-    "test": "mocha --require ts-node/register --timeout 20000 src/test/**/*.test.ts"
-  },
-  "devDependencies": {
-    "@types/vscode": "^1.82.0",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
-    "@types/ws": "^8.5.5",
-    "@types/chokidar": "^2.1.3",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "eslint": "^8.41.0",
-    "typescript": "^5.1.3",
-    "mocha": "^10.2.0",
-    "ts-node": "^10.9.1"
+    "watch": "tsc -watch -p ./"
   },
   "dependencies": {
-    "ws": "^8.13.0",
-    "chokidar": "^3.5.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "axios": "^1.5.0"
+    "@babel/generator": "^7.24.6",
+    "@babel/parser": "^7.24.6",
+    "axios": "^1.6.2",
+    "diff-match-patch": "^1.0.5",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.100.0"
   }
 }
